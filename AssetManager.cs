@@ -1,4 +1,5 @@
 // Mostly copied from: https://github.com/jngo102/Silksong.LostSinner/blob/393a75bbfd44234246eb8cf97cb4703397227e0d/Source/AssetManager.cs
+// License can be found at LICENSE_LostSinner.md in this repository
 
 using System;
 using System.Collections;
