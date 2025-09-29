@@ -34,7 +34,7 @@ internal class SlapController : MonoBehaviour
     {
         slapDamager = new GameObject("Slap Damager");
         var collider = slapDamager.AddComponent<CircleCollider2D>();
-        collider.radius = 1;
+        collider.radius = 0.8f;
         collider.isTrigger = true;
         collider.includeLayers = LayerMask.GetMask("Enemies", "Projectiles");
         // collider.includeLayers = new LayerMask() {m_Mask = -2042750632}; // TODO: Fix the mask
@@ -267,7 +267,7 @@ internal class SlapController : MonoBehaviour
             {
                 gameObject = slapOwner,
                 activate = new FsmBool() { Value = false },
-                delay = new FsmFloat() { Value = 0.1f },
+                delay = new FsmFloat() { Value = 0.2f },
             },
             // new TriggerSlapDamager(),
             // new EnableColliders()
@@ -292,11 +292,11 @@ internal class SlapController : MonoBehaviour
             //     oneShotClip = slapAudio,
             //     volume = 1f
             // },
-            new Tk2dWatchAnimationEvents()
-            {
-                gameObject = owner,
-                animationCompleteEvent = FsmEvent.Finished
-            },
+            // new Tk2dWatchAnimationEvents()
+            // {
+            //     gameObject = owner,
+            //     animationCompleteEvent = FsmEvent.Finished
+            // },
             ensureGroundedAction
         ];
 
