@@ -15,7 +15,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 namespace ThisSlaps;
 
 // TODO - adjust the plugin guid as needed
-[BepInAutoPlugin(id: "io.github.thisslaps")]
+[BepInAutoPlugin(id: "dev.hdelc.ThisSlaps")]
 public partial class ThisSlapsPlugin : BaseUnityPlugin
 {
     public static SlapActionSet inputActions;
