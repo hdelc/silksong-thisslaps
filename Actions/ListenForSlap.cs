@@ -1,8 +1,7 @@
 using HutongGames.PlayMaker;
-using InControl;
 using UnityEngine;
 
-namespace ThisSlaps;
+namespace ThisSlaps.Actions;
 
 [ActionCategory("Controls")]
 public class ListenForSlap : FsmStateAction
@@ -43,24 +42,29 @@ public class ListenForSlap : FsmStateAction
         {
             return;
         }
+
         if (timer > 0f)
         {
             timer -= Time.deltaTime;
             return;
         }
+
         if (slapActions.slapAction.WasPressed)
         {
             ThisSlapsPlugin.Log.LogInfo("Send SLAP");
             base.Fsm.Event(wasPressed);
         }
+
         if (slapActions.slapAction.WasReleased)
         {
             base.Fsm.Event(wasReleased);
         }
+
         if (slapActions.slapAction.IsPressed)
         {
             base.Fsm.Event(isPressed);
         }
+
         if (!slapActions.slapAction.IsPressed)
         {
             base.Fsm.Event(isNotPressed);

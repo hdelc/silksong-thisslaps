@@ -18,12 +18,10 @@ public partial class ThisSlapsPlugin : BaseUnityPlugin
     public ConfigEntry<int> SlapDamageConfig;
     public ConfigEntry<float> SlapKnockbackConfig;
 
-    private AsyncOperationHandle<AudioClip> _slapAudioHandle;
-    private AudioClip _slapAudio;
     private SlapController _slapController;
     private Harmony _harmony;
     private ConfigEntry<Key> _slapKeybindConfig;
-    
+
 
     private void Awake()
     {
@@ -98,8 +96,8 @@ public partial class ThisSlapsPlugin : BaseUnityPlugin
         // _slapAudio = _slapAudioHandle.Result;
         yield return AssetManager.ManuallyLoadBundles();
         yield return AssetManager.Initialize();
-        _slapAudio = AssetManager.Get<AudioClip>("hornet_slap_B_2");
-        if (_slapAudio is null)
+        var slapAudio = AssetManager.Get<AudioClip>("hornet_slap_B_2");
+        if (slapAudio is null)
         {
             Logger.LogInfo("Slap audio load failed.");
         }

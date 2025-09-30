@@ -1,6 +1,6 @@
 using HutongGames.PlayMaker;
 
-namespace ThisSlaps;
+namespace ThisSlaps.Actions;
 
 public class CheckCanSlap : FsmStateAction
 {
