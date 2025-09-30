@@ -13,14 +13,17 @@ namespace ThisSlaps;
 public partial class ThisSlapsPlugin : BaseUnityPlugin
 {
     public static SlapActionSet? inputActions;
-    public static ManualLogSource Log;
+    public static ManualLogSource Log = null!;
     public static ThisSlapsPlugin instance = null!;
+    public ConfigEntry<int> SlapDamageConfig;
+    public ConfigEntry<float> SlapKnockbackConfig;
 
     private AsyncOperationHandle<AudioClip> _slapAudioHandle;
     private AudioClip _slapAudio;
     private SlapController _slapController;
     private Harmony _harmony;
     private ConfigEntry<Key> _slapKeybindConfig;
+    
 
     private void Awake()
     {
@@ -30,8 +33,24 @@ public partial class ThisSlapsPlugin : BaseUnityPlugin
         _harmony = new Harmony(Id);
         _harmony.PatchAll(typeof(HeroPatches));
 
+        SetupSlapConfig();
         SetupInputs();
         StartCoroutine(LoadSlapAudio());
+    }
+
+    private void SetupSlapConfig()
+    {
+        SlapDamageConfig = Config.Bind(
+            "Slap Properties",
+            "Damage",
+            15,
+            "How much damage the slap deals");
+        SlapKnockbackConfig = Config.Bind(
+            "Slap Properties",
+            "Knockback",
+            0f,
+            "How much knockback the slap applies"
+        );
     }
 
     private void SetupInputs()
@@ -92,6 +111,8 @@ public partial class ThisSlapsPlugin : BaseUnityPlugin
 
     private void OnDestroy()
     {
+        inputActions?.Destroy();
+        Destroy(_slapController);
         _harmony.UnpatchSelf();
         AssetManager.UnloadManualBundles();
     }
